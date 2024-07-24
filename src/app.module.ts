@@ -45,14 +45,17 @@ import { MailerModule } from '@nestjs-modules/mailer';
           password: configService.get('PASSWORD'),
           database: configService.get('DATABASE'),
           entities: ['**/*.entity.js'],
-          logging:true
+          logging:true,
+          // synchronize: true,
+          
           // type: 'mysql',
-          // host: 'localhost',
-          // port: 3306,
-          // username: 'root',
-          // password: 'Password',
-          // database: 'new_schema',
-          // entities: [],
+          // host: 'mysql_db',
+          // port: 3307,
+          // username: 'testuser',
+          // password: 'testuser123',
+          // database: 'nestjs_docker',
+          // entities: ['**/*.entity.js'],
+          // logging:true
         }),
       inject: [ConfigService]
     }),

@@ -2,6 +2,10 @@
 .env
 ormconfig.js
 .aws
+Dockerfile
+Dockerfile.prod
+docker-compose.yml
+docker-compose.prod.yml
 
 # compiled output
 /dist
