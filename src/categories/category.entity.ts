@@ -1,5 +1,4 @@
-import { Subcategory } from "src/subcategories/subcategory.entity";
-import { User } from "src/users/user.entity";
+import { Subcategory } from "../subcategories/subcategory.entity";
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, PrimaryColumn, ManyToMany, JoinTable } from "typeorm"
 import { Place } from "../places/entities/place.entity";
 

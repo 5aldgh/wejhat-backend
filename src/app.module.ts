@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { datasourceOptions } from './Datasource/datasource';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { APP_PIPE } from '@nestjs/core';
-// import cookieSession from 'cookie-session';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PlacesModule } from './places/places.module';
 import { CategoriesModule } from './categories/categories.module';
@@ -13,15 +13,13 @@ import { NeighborhoodsModule } from './neighborhoods/neighborhoods.module';
 import { CommentsModule } from './comments/comments.module';
 import { UsersFavoritesModule } from './users-favorites/users-favorites.module';
 import { SubcategoriesModule } from './subcategories/subcategories.module';
-// import dbConfig from 'ormconfig';
-// import { typeOrmAsyncConfig } from 'typeorm.config';
-// import dbConfig from 'ormconfig';
 const cookieSession = require('cookie-session');
 import { MailerModule } from '@nestjs-modules/mailer';
 
 
 @Module({
   imports: [
+    TypeOrmModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
@@ -35,30 +33,21 @@ import { MailerModule } from '@nestjs-modules/mailer';
         },
       },
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-          type: 'mysql',
-          host: configService.get('HOST'),
-          port: configService.get('DB_PORT'),
-          username: configService.get('USER'),
-          password: configService.get('PASSWORD'),
-          database: configService.get('DATABASE'),
-          entities: ['**/*.entity.js'],
-          logging:true,
-          // synchronize: true,
-          
-          // type: 'mysql',
-          // host: 'mysql_db',
-          // port: 3307,
-          // username: 'testuser',
-          // password: 'testuser123',
-          // database: 'nestjs_docker',
-          // entities: ['**/*.entity.js'],
-          // logging:true
-        }),
-      inject: [ConfigService]
-    }),
+    TypeOrmModule.forRoot(datasourceOptions),
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   useFactory: (configService: ConfigService) => ({
+    //       // type: 'mysql',
+    //       // host: configService.get('HOST'),
+    //       // port: configService.get('DB_PORT'),
+    //       // username: configService.get('USER'),
+    //       // password: configService.get('PASSWORD'),
+    //       // database: configService.get('DATABASE'),
+    //       // entities: ['**/*.entity.js'],
+    //       // logging:true,
+    //     }),
+    //   inject: [ConfigService]
+    // }),
     UsersModule,
     PlacesModule,
     CategoriesModule,

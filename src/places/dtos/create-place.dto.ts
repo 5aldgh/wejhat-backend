@@ -13,11 +13,11 @@ import {
   IsObject,
   IsArray,
 } from 'class-validator';
-import { Category } from 'src/categories/category.entity';
-import { PlaceCateogryDto } from 'src/categories/place-category.dto';
-import { Neighborhood } from 'src/neighborhoods/neighborhood.entity';
-import { SubcategoryDto } from 'src/subcategories/subcategory.dto';
-import { Subcategory } from 'src/subcategories/subcategory.entity';
+import { Category } from '../../categories/category.entity';
+import { PlaceCateogryDto } from '../../categories/place-category.dto';
+import { Neighborhood } from '../../neighborhoods/neighborhood.entity';
+import { SubcategoryDto } from '../../subcategories/subcategory.dto';
+import { Subcategory } from '../../subcategories/subcategory.entity';
 
 export class CreatePlaceDto {
   @IsString()

@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { PlaceDto } from 'src/places/dtos/place.dto';
-import { PlaceCommentDto } from 'src/places/dtos/place_comment.dto';
-import { Place } from 'src/places/entities/place.entity';
-import { currentUser } from 'src/users/decorators/current-user.decorator';
-import { User } from 'src/users/user.entity';
+import { PlaceDto } from '../places/dtos/place.dto';
+import { PlaceCommentDto } from '../places/dtos/place_comment.dto';
+import { Place } from '../places/entities/place.entity';
+import { currentUser } from '../users/decorators/current-user.decorator';
+import { User } from '../users/user.entity';
 import { CommentDto } from './comment.dto';
 import { CommentsService } from './comments.service';
 

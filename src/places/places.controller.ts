@@ -9,17 +9,17 @@ import {
   Delete,
   Query
 } from '@nestjs/common';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 import { CreatePlaceDto } from './dtos/create-place.dto';
 import { PlacesService } from './places.service';
 import { User } from '../users/user.entity';
-import { currentUser } from 'src/users/decorators/current-user.decorator';
+import { currentUser } from '../users/decorators/current-user.decorator';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { ApprovePlaceDto } from './dtos/approve-place.dto';
-import { UserDto } from 'src/users/dtos/user.dto';
-import { Neighborhood } from 'src/neighborhoods/neighborhood.entity';
-import { Category } from 'src/categories/category.entity';
-import { PlaceCateogryDto } from 'src/categories/place-category.dto';
+import { UserDto } from '../users/dtos/user.dto';
+import { Neighborhood } from '../neighborhoods/neighborhood.entity';
+import { Category } from '../categories/category.entity';
+import { PlaceCateogryDto } from '../categories/place-category.dto';
 
 
 @Controller('places')

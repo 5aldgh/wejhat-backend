@@ -1,5 +1,5 @@
-import { userInfo } from "os";
-import { User } from "src/users/user.entity";
+// import { userInfo } from "os";
+import { User } from "../users/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Place } from "../places/entities/place.entity";
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { City } from 'src/cities/city.entity';
-// import { AppDataSource } from 'src/datasource';
+import { City } from '../cities/city.entity';
+// import { AppDataSource } from '../datasource';
 import { DataSource, Repository } from 'typeorm';
 
 @Injectable()

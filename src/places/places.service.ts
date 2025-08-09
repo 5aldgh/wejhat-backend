@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Place } from './entities/place.entity';
 import { CreatePlaceDto } from './dtos/create-place.dto';
-import { Neighborhood } from 'src/neighborhoods/neighborhood.entity';
-import { UserDto } from 'src/users/dtos/user.dto';
-import { Category } from 'src/categories/category.entity';
-import { PlaceCateogryDto } from 'src/categories/place-category.dto';
+import { Neighborhood } from '../neighborhoods/neighborhood.entity';
+import { UserDto } from '../users/dtos/user.dto';
+import { Category } from '../categories/category.entity';
+import { PlaceCateogryDto } from '../categories/place-category.dto';
 import { ApprovePlaceDto } from './dtos/approve-place.dto';
 import { DateTime } from 'aws-sdk/clients/devicefarm';
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PlaceCommentDto } from 'src/places/dtos/place_comment.dto';
-import { Place } from 'src/places/entities/place.entity';
-import { User } from 'src/users/user.entity';
+import { PlaceCommentDto } from '../places/dtos/place_comment.dto';
+import { Place } from '../places/entities/place.entity';
+import { User } from '../users/user.entity';
 import { Repository } from 'typeorm';
 import { CommentDto } from './comment.dto';
 import { Comment } from './comment.entity';

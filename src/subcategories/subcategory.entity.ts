@@ -1,5 +1,5 @@
-import { Category } from 'src/categories/category.entity';
-import { Place } from 'src/places/entities/place.entity';
+import { Category } from '../categories/category.entity';
+import { Place } from '../places/entities/place.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

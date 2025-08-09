@@ -1,17 +1,16 @@
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from 'src/categories/category.entity';
-import { CreateCategoryDto } from 'src/categories/create-category.dto';
-import { CategoryDto } from 'src/categories/category.dto';
+import { Category } from '../categories/category.entity';
+import { CreateCategoryDto } from '../categories/create-category.dto';
+import { CategoryDto } from '../categories/category.dto';
 import { Repository } from 'typeorm';
 import { SignupUserDto } from './dtos/signup_user.dto';
 import { User } from './user.entity';
-import { UsersFavoriteDto } from 'src/places/dtos/users-favorite.dto';
-import { Place } from 'src/places/entities/place.entity';
+import { UsersFavoriteDto } from '../places/dtos/users-favorite.dto';
+import { Place } from '../places/entities/place.entity';
 import { currentUser } from './decorators/current-user.decorator';
-import { Admin } from './admin.entity';
-import { UsersFavorites } from 'src/users-favorites/users_favorites.entity';
+import { UsersFavorites } from '../users-favorites/users_favorites.entity';
 import { UserDto } from './dtos/user.dto';
 import { Response } from 'express';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
@@ -234,12 +233,16 @@ export class UsersService {
     await this.FavoritesRepo.remove(filteredObject);
   }
 
+
+  // Admins -----------------------------------------------------------------
+
   async makeAdmin(user: User, session: any) {
     // const foundUser = await this.repo.findOne(user);
     // const adminUser = new Admin();
     // adminUser.user = foundUser;
     // session.admin = adminUser.user;
   }
+
 
   sendMail() {
     const message = `Forgot your password? If you didn't forget your password, please ignore this email!`;

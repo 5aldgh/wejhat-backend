@@ -1,8 +1,8 @@
 import { Exclude, Expose } from 'class-transformer';
 import { IsString, IsNumber } from 'class-validator';
-import { Category } from 'src/categories/category.entity';
-import { Comment } from 'src/comments/comment.entity';
-import { Place } from 'src/places/entities/place.entity';
+import { Category } from '../../categories/category.entity';
+import { Comment } from '../../comments/comment.entity';
+import { Place } from '../../places/entities/place.entity';
 import { JoinTable, ManyToMany, OneToMany } from 'typeorm';
 
 export class SignupUserDto {

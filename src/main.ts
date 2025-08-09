@@ -6,6 +6,7 @@ import { AppModule } from './app.module';
 const cookieSession = require('cookie-session');
 
 async function bootstrap() {
+  console.log(process.env.m)
   const app = await NestFactory.create(AppModule);
   app.use(helmet())
   app.enableCors();

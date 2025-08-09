@@ -1,10 +1,11 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsString, IsNumber } from 'class-validator';
-import { Category } from 'src/categories/category.entity';
-import { Comment } from 'src/comments/comment.entity';
-import { Place } from 'src/places/entities/place.entity';
-import { UsersFavorites } from 'src/users-favorites/users_favorites.entity';
+import { IsString, IsNumber, IsEnum } from 'class-validator';
+import { Category } from '../../categories/category.entity';
+import { Comment } from '../../comments/comment.entity';
+import { Place } from '../../places/entities/place.entity';
+import { UsersFavorites } from '../../users-favorites/users_favorites.entity';
 import { JoinTable, ManyToMany, OneToMany } from 'typeorm';
+import { UserRole } from '../user.entity';
 
 export class UserDto {
   @Expose()
@@ -20,6 +21,9 @@ export class UserDto {
   
   @IsString()
   password: string;
+
+  @IsString()
+  role: UserRole;
 
   @OneToMany(() => Place, (place) => place.creatorId)
   place: Place[];

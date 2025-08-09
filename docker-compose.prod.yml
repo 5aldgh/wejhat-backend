@@ -13,8 +13,8 @@ services:
 
   mysql_db:
     image: mysql
-    ports:
-    - '3307:3307'
+    # ports:
+    # - '3307:3307'
     environment:
     - MYSQL_ROOT_PASSWORD=root_password_123
     - MYSQL_DATABASE=nestjs_docker

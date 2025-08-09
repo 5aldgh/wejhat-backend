@@ -16,36 +16,39 @@ import {
   Redirect,
   Res,
 } from '@nestjs/common';
-// import { parse } from 'path/posix';
 import { Response } from 'express';
 import { SignupUserDto } from './dtos/signup_user.dto';
 import { SigninUserDto } from './dtos/signin_user.dto';
 import { UsersService } from './users.service';
-import { User } from './user.entity';
+import { UserRole, User } from './user.entity';
 import { Serialize } from '../interceptors/serialize.interceptor';
-// import { AuthService } from './auth.service';
 import { currentUser } from './decorators/current-user.decorator';
 import { AuthGuard } from '../guards/auth.guard';
 import * as passport from '@nestjs/passport';
-import { Category } from 'src/categories/category.entity';
-import { UsersFavoriteDto } from 'src/places/dtos/users-favorite.dto';
+import { Category } from '../categories/category.entity';
+import { UsersFavoriteDto } from '../places/dtos/users-favorite.dto';
 import { UserDto } from './dtos/user.dto';
+import { Roles } from './decorators/roles.decorator';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { PlacesService } from 'src/places/places.service';
 
 @Controller('users')
 // @Serialize(UserDto)
 export class UsersController {
   constructor(
     private usersService: UsersService,
-    // private authService: AuthService,
+    private placeService: PlacesService
   ) {}
 
   @Get('/whoami')
   @Serialize(UserDto)
   @UseGuards(AuthGuard)
-  whoAmI(@currentUser() user: User, @Session() session: any) {
+  whoAmI(@currentUser() user: User) {
     console.log(user);
     return user;
   }
+
+ 
 
   @Post('/preferences')
   async setPreferences(
@@ -58,7 +61,6 @@ export class UsersController {
   @Get('/preferences')
   async getPreferences(@currentUser() user: User) {
     return await this.usersService.getPreferences(user);
-    // console.log(user.Categories);
   }
 
   @Serialize(UsersFavoriteDto)
@@ -78,18 +80,12 @@ export class UsersController {
   @Get()
   @Serialize(UserDto)
   getUsers(@Query('email') email: string) {
-    // return this.usersService.find(email);
   }
 
-  @Patch('/make-admin')
-  async makeAdmin(@currentUser() user: User, @Session() session: any) {
-    return this.usersService.makeAdmin(user, session);
-  }
 
   @Post('/signup')
   @Serialize(SignupUserDto)
   async sendUser(@Body() body: SignupUserDto, @Session() session: any) {
-    // console.log(body);
     console.log(session);
     const user = await this.usersService.signup(
       body.email,
@@ -112,7 +108,6 @@ export class UsersController {
   @Serialize(UserDto)
   @UseGuards(AuthGuard)
   async signout(@Session() session: any) {
-    // console.log(session.userId);
     if (!session.userId) {
       throw new NotFoundException('user not found');
     }
@@ -133,6 +128,30 @@ export class UsersController {
   resetPassword(@Body() body: UserDto ) {
     return this.usersService.passwordReset(body.email, body.password);
   }
+
+  // Admins -----------------------------------------------------
+
+  @Patch('/make-admin')
+  async makeAdmin(@currentUser() user: User, @Session() session: any) {
+    return this.usersService.makeAdmin(user, session);
+  }
+
+  @Get('/admincheck')
+  @Roles(UserRole.ADMIN)
+  @UseGuards(RolesGuard)
+  adminCheck(@currentUser() user: User, @Session() session: any) {
+    console.log('if you are here then you are a user');
+    // console.log(user);
+  }
+
+  @Delete('/place/:id')
+  @Roles(UserRole.ADMIN)
+  @UseGuards(RolesGuard)
+  deletePlace(@Param('id') id: number) {
+    return this.placeService.deletePlace(id);
+  }
+
+  // Social media authentication ----------------------------------
 
   @Get('/google')
   @UseGuards(passport.AuthGuard('google'))
@@ -211,8 +230,4 @@ export class UsersController {
     });
   }
 
-  // @Get('users-preferences')
-  //   async userPreferences(category: ){
-  //     return this.usersService.userPreferences(categoryId);
-  //   }
 }

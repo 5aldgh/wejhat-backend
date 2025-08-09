@@ -5,19 +5,17 @@ import { User } from './user.entity';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { CurrentUserMiddleware } from './middlewares/current-user.middleware';
-// import { GoogleStrategy } from 'src/users/strategies/google.strategy';
-// import { FacebookStrategy } from 'src/users/strategies/facebook.strategy';
+// import { GoogleStrategy } from '../users/strategies/google.strategy';
+// import { FacebookStrategy } from '../users/strategies/facebook.strategy';
 // import { TwitterStrategy } from './strategies/twitter.startegy';
-import { Admin } from './admin.entity';
-import { Owner } from './owner.entity';
-import { PlacesModule } from 'src/places/places.module';
-import { Place } from 'src/places/entities/place.entity';
-import { UsersFavorites } from 'src/users-favorites/users_favorites.entity';
+import { PlacesModule } from '../places/places.module';
+import { Place } from '../places/entities/place.entity';
+import { UsersFavorites } from '../users-favorites/users_favorites.entity';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Admin, Owner, Place, UsersFavorites]),
+    TypeOrmModule.forFeature([User, Place, UsersFavorites]),
     JwtModule.register({
       secret: process.env.JWTSecret,
       signOptions: { expiresIn: '10 s' },

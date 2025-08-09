@@ -1,7 +1,7 @@
-import { Category } from 'src/categories/category.entity';
-import { Comment } from 'src/comments/comment.entity';
-import { Place } from 'src/places/entities/place.entity';
-import { UsersFavorites } from 'src/users-favorites/users_favorites.entity';
+import { Category } from '../categories/category.entity';
+import { Comment } from '../comments/comment.entity';
+import { Place } from '../places/entities/place.entity';
+import { UsersFavorites } from '../users-favorites/users_favorites.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -12,6 +12,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+export enum UserRole {
+  OWNER = 'owner',
+  ADMIN = 'admin',
+  VENDOR = 'vendor',
+  USER = 'user',
+}
 
 @Entity()
 export class User {
@@ -26,6 +33,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER})
+  role: UserRole;
 
   @OneToMany(() => Place, (place) => place.creatorId)
   place: Place[];
