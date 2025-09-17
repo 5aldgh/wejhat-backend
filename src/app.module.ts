@@ -1,6 +1,9 @@
 import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { datasourceOptions } from './Datasource/datasource';
+import {
+  devDatasourceOptions,
+  prodDatasourceOptions,
+} from './Datasource/datasource';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -15,7 +18,6 @@ import { UsersFavoritesModule } from './users-favorites/users-favorites.module';
 import { SubcategoriesModule } from './subcategories/subcategories.module';
 const cookieSession = require('cookie-session');
 import { MailerModule } from '@nestjs-modules/mailer';
-
 
 @Module({
   imports: [
@@ -33,21 +35,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
         },
       },
     }),
-    TypeOrmModule.forRoot(datasourceOptions),
-    // TypeOrmModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   useFactory: (configService: ConfigService) => ({
-    //       // type: 'mysql',
-    //       // host: configService.get('HOST'),
-    //       // port: configService.get('DB_PORT'),
-    //       // username: configService.get('USER'),
-    //       // password: configService.get('PASSWORD'),
-    //       // database: configService.get('DATABASE'),
-    //       // entities: ['**/*.entity.js'],
-    //       // logging:true,
-    //     }),
-    //   inject: [ConfigService]
-    // }),
+    TypeOrmModule.forRoot(devDatasourceOptions),
+    TypeOrmModule.forRoot(prodDatasourceOptions),
     UsersModule,
     PlacesModule,
     CategoriesModule,
@@ -57,9 +46,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
     UsersFavoritesModule,
     SubcategoriesModule,
   ],
-  controllers: [
-    AppController,
-  ],
+  controllers: [AppController],
   providers: [
     AppService,
     {
