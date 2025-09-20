@@ -35,8 +35,11 @@ import { MailerModule } from '@nestjs-modules/mailer';
         },
       },
     }),
-    TypeOrmModule.forRoot(devDatasourceOptions),
-    TypeOrmModule.forRoot(prodDatasourceOptions),
+   TypeOrmModule.forRoot(
+  process.env.NODE_ENV === 'production'
+    ? prodDatasourceOptions
+    : devDatasourceOptions
+),
     UsersModule,
     PlacesModule,
     CategoriesModule,

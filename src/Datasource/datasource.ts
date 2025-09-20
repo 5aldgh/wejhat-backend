@@ -8,11 +8,11 @@ import {  DataSource, DataSourceOptions  } from 'typeorm';
 export const devDatasourceOptions: DataSourceOptions = {
 
           type: 'mysql',
-          host: process.env.HOST,
-          port: Number(process.env.DB_PORT),
-          username: process.env.USER,
-          password: process.env.PASSWORD,
-          database: process.env.DATABASE,
+          host: process.env.DEV_HOST,
+          port: Number(process.env.DEV_DB_PORT),
+          username: process.env.DEV_USER,
+          password: process.env.DEV_PASSWORD,
+          database: process.env.DEV_DATABASE,
           entities: ['**/*.entity.js'],
           migrations: ['./migrations/*.js'],
           logging:true,
@@ -22,11 +22,11 @@ export const devDatasourceOptions: DataSourceOptions = {
 export const prodDatasourceOptions: DataSourceOptions = {
 
           type: 'mysql',
-          host: process.env.HOST,
-          port: Number(process.env.DB_PORT),
-          username: process.env.USER,
-          password: process.env.PASSWORD,
-          database: process.env.DATABASE,
+          host: process.env.PROD_HOST,
+          port: Number(process.env.PROD_DB_PORT),
+          username: process.env.PROD_USER,
+          password: process.env.PROD_PASSWORD,
+          database: process.env.PROD_DATABASE,
           entities: ['**/*.entity.js'],
           migrations: ['./migrations/*.js'],
           logging:true,
