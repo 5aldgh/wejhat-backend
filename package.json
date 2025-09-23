@@ -22,7 +22,8 @@
     "typeorm": "npm run build && npx typeorm -d dist/datasource/datasource.js",
     "migration:generate": "npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run",
-    "migration:revert": "npm run typeorm -- migration:revert"
+    "migration:revert": "npm run typeorm -- migration:revert",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@nestjs-hybrid-auth/all": "^1.3.0",
